@@ -17,18 +17,77 @@ We begin by designing the task-specific KG structures to establish a unified top
 Then we propose semantic-conditioned message passing, a novel mechanism addressing the inherent semantic isolation in traditional KG reasoning, by jointly modeling structural and semantic invariance patterns in graph representations.
 Evaluated on 38 diverse datasets spanning node-, link-, and graph-level tasks, SCR achieves substantial performance gains over existing foundation models and supervised baselines, demonstrating its remarkable efficacy and adaptability.
 
-## Requirements ##
+Source code for evaluating and training the SCR model. Evaluation supports
+zero-shot transfer across 39 datasets spanning three task types:
 
-- pytorch  2.1.0+cu121
-- torch_geometric  2.4.0
-- torch_scatter 2.1.2+pt21cu121
-- transformers 4.41.1
-  
-Accepted by NeurIPS 2025. Source code is coming soon.
+- **KG Inductive Reasoning** (25 datasets)
+- **Node Classification** (6 datasets)
+- **Graph Classification** (8 datasets)
 
-## Citation ##
+Training can start from scratch, fine-tune the released SCR checkpoint, or
+fine-tune from the ULTRA backbone.
 
-If you find this codebase useful in your research, please cite the original paper.
+## Data Acquisition
+
+`resource/` (entity/relation text files used by semantic encoding, ~300 MB) and
+`kg-datasets/` (evaluation datasets) are **not bundled** in this repository due
+to size. Download both from Google Drive:
+
+> 🔗 **[\[Google Drive\]](https://drive.google.com/file/d/1bk9EgIn83QGRmKDZFSqXrrUny1UwFWIt/view?usp=sharing)**
+
+## Quick Start
+
+### 1. Environment Setup
+
+```bash
+conda create -n scr python=3.11
+conda activate scr
+
+# Install PyTorch (adjust CUDA version as needed)
+pip install torch==2.5.1+cu121 --index-url https://download.pytorch.org/whl/cu121
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### 2. Prepare Data & Checkpoint
+
+Follow [Data Acquisition](#data-acquisition) to populate `resource/` and
+`kg-datasets/`. The checkpoints are already included in `ckpts/`:
+
+```
+ckpts/scr_3g.pth    (4.5 MB)   # released SCR model
+ckpts/ultra_3g.pth  (2 MB)     # ULTRA backbone, for training variants
+```
+
+### 3. Run Evaluation
+
+**Default config and checkpoint:**
+
+```bash
+python script/eval.py
+```
+
+**Specify GPU / custom config:**
+
+```bash
+python script/eval.py -c config/eval_all.yaml -g 0
+```
+
+### 4. Train
+
+```bash
+# Train from scratch
+python script/train.py --ckpt none
+
+# Fine-tune from the released SCR checkpoint
+python script/train.py
+
+# Fine-tune from a custom checkpoint on a specific GPU
+python script/train.py --ckpt ./ckpts/my_model.pth -g 0
+```
+
+## Citation
 
 ```bibtex
 @article{wang2024towards,
@@ -39,6 +98,10 @@ If you find this codebase useful in your research, please cite the original pape
 }
 ```
 
-## Acknowledgement ##
+## License
 
-We refer to the code of [ULTRA](https://github.com/DeepGraphLearning/ULTRA). Thanks for their contributions.
+This code is provided for research purposes. The ULTRA codebase is subject to their respective licenses.
+
+## Acknowledgement
+
+We refer to the code of ULTRA. Thanks for their contributions.

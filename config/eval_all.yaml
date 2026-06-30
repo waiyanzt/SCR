@@ -1,0 +1,74 @@
+output_dir: ./output
+project_dir: ./
+
+dataset:
+  class: JointDataset
+  graphs: [FB15k237, WN18RR, CoDExMedium]
+  root: ./kg-datasets/
+
+moreeval:
+  evalgraphs: []
+  ind_evalgraphs: [
+    # IndE (GraIL v1-v4, 12 datasets)
+    FB15k237Inductive:v1, FB15k237Inductive:v2, FB15k237Inductive:v3, FB15k237Inductive:v4,
+    WN18RRInductive:v1, WN18RRInductive:v2, WN18RRInductive:v3, WN18RRInductive:v4,
+    NELLInductive:v1, NELLInductive:v2, NELLInductive:v3, NELLInductive:v4,
+    # IndER (Ingram, 13 datasets)
+    FBIngram:25, FBIngram:50, FBIngram:75, FBIngram:100,
+    WKIngram:25, WKIngram:50, WKIngram:75, WKIngram:100,
+    NLIngram:0, NLIngram:25, NLIngram:50, NLIngram:75, NLIngram:100
+  ]
+  graphevalgraphs: [GF_IMDB, GF_COLLAB, GF_PROTEINS, GF_MUTAG, GF_ENZYMES, GF_COX2, GF_BZR, GF_DD]
+  nodeevalgraphs: [NF_CORA, NF_Citeseer, NF_Pubmed, NF_Wisconsin, NF_Texas, NF_Actor]
+  homolinkgraphs: []
+
+model:
+  class: SCR
+  relation_model:
+    class: NBFNet
+    input_dim: 64
+    hidden_dims: [64, 64, 64, 64, 64, 64]
+    message_func: distmult
+    aggregate_func: sum
+    short_cut: yes
+    layer_norm: yes
+    with_feats: no
+    feat_type: none
+    feat_dim: 64
+  entity_model:
+    class: IndNBFNet
+    input_dim: 64
+    hidden_dims: [64, 64, 64, 64, 64, 64]
+    message_func: distmult
+    aggregate_func: spna
+    short_cut: yes
+    layer_norm: yes
+    self_loop: yes
+    expert_num: 8
+    noise_k: 2
+    with_feats: yes
+    feat_type: end
+    feat_dim: 64
+
+task:
+  name: MultiGraphPretraining
+  num_negative: 512
+  strict_negative: yes
+  adversarial_temperature: 1
+  metric: [mr, mrr, hits@1, hits@3, hits@10]
+
+optimizer:
+  class: AdamW
+  lr: 5.0e-4
+
+train:
+  gpus: [0]
+  batch_size: 8
+  # Large GC graphs OOM at batch_size=8. Auto-reduce when nodes > 30K.
+  large_graph_threshold: 30000
+  large_graph_batch_size: 2
+  num_epoch: 10
+  log_interval: 400
+  batch_per_epoch: 2000
+
+checkpoint: ./ckpts/scr_3g.pth

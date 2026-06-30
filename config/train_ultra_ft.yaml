@@ -1,0 +1,101 @@
+# SCR Full Fine-Tuning from ULTRA backbone (ultra_3g.pth)  -- REQUIRES --no-freeze
+# ----------------------------------------------------------------------------
+# ultra_3g.pth holds ONLY the relational backbone. The SCR feature-fusion / GC
+# components (entity_model2, global_mlp, graph_encoder_gc, query, spna, MoE) are NOT
+# in ultra_3g, so they start RANDOM. You MUST run with --no-freeze so the backbone and
+# the random components co-train. Running WITHOUT --no-freeze freezes entity_model.layers
+# (random / key-mismatched) -> loss plateaus ~0.45, KG MRR stuck ~0.3 (observed).
+#
+# Freeze is ONLY correct when CONTINUING from scr_3g.pth (every component already trained).
+# From ultra_3g, or from scratch, ALWAYS use --no-freeze.
+#
+# Why this beats continuing from scr_3g: GC components re-learn instead of drifting
+# away from already-good scr_3g values, and the transfer-aware checkpoint rule keeps
+# the epoch that is best on KG+transfer (not KG-only).
+#
+# Usage: python script/train.py -c config/train_ultra_ft.yaml -g 0 -s <seed> --no-freeze
+
+output_dir: ./output
+project_dir: ./
+
+dataset:
+  class: JointDataset
+  graphs: [FB15k237, WN18RR, CoDExMedium]
+  root: ./kg-datasets/
+
+moreeval:
+  evalgraphs: []
+  ind_evalgraphs: [
+    # IndE (GraIL v1-v4, 12 datasets)
+    FB15k237Inductive:v1, FB15k237Inductive:v2, FB15k237Inductive:v3, FB15k237Inductive:v4,
+    WN18RRInductive:v1, WN18RRInductive:v2, WN18RRInductive:v3, WN18RRInductive:v4,
+    NELLInductive:v1, NELLInductive:v2, NELLInductive:v3, NELLInductive:v4,
+    # IndER (Ingram, 13 datasets)
+    FBIngram:25, FBIngram:50, FBIngram:75, FBIngram:100,
+    WKIngram:25, WKIngram:50, WKIngram:75, WKIngram:100,
+    NLIngram:0, NLIngram:25, NLIngram:50, NLIngram:75, NLIngram:100
+  ]
+  graphevalgraphs: [GF_IMDB, GF_COLLAB, GF_PROTEINS, GF_MUTAG, GF_ENZYMES, GF_COX2, GF_BZR, GF_DD]
+  nodeevalgraphs: [NF_CORA, NF_Citeseer, NF_Pubmed, NF_Wisconsin, NF_Texas, NF_Actor]
+  homolinkgraphs: []
+
+model:
+  class: SCR
+  relation_model:
+    class: NBFNet
+    input_dim: 64
+    hidden_dims: [64, 64, 64, 64, 64, 64]
+    message_func: distmult
+    aggregate_func: sum
+    short_cut: yes
+    layer_norm: yes
+    with_feats: no
+    feat_type: none
+    feat_dim: 64
+  entity_model:
+    class: IndNBFNet
+    input_dim: 64
+    hidden_dims: [64, 64, 64, 64, 64, 64]
+    message_func: distmult
+    aggregate_func: spna
+    short_cut: yes
+    layer_norm: yes
+    self_loop: yes
+    expert_num: 8
+    noise_k: 2
+    with_feats: yes
+    feat_type: end
+    feat_dim: 64
+
+task:
+  name: MultiGraphPretraining
+  num_negative: 512
+  strict_negative: yes
+  adversarial_temperature: 1
+  metric: [mr, mrr, hits@1, hits@3, hits@10]
+
+optimizer:
+  class: AdamW
+  lr: 5.0e-4
+
+train:
+  gpus: [0]
+  batch_size: 8
+  test_batch_size: 32
+  # Large-graph GC eval (PROTEINS 44K, DD 336K, COLLAB 377K nodes) OOMs at batch_size=8
+  # after training fills GPU. Auto-switch to smaller batch when nodes exceed threshold.
+  large_graph_threshold: 30000
+  large_graph_batch_size: 2
+  fewshot_train: 1
+  num_epoch: 16
+  log_interval: 400
+  batch_per_epoch: 3000
+  # Transfer-aware checkpoint selection: keep the epoch best on KG-valid + a small
+  # transfer proxy (not KG-valid alone). Proxy = mean(inductive-KG MRR, NC/GC Acc).
+  transfer_ckpt: true
+  transfer_start_epoch: 4      # only spend transfer-eval budget after warmup
+  transfer_interval: 2         # eval proxy every N eval-points
+  transfer_weight: 0.5         # w: best = (1-w)*KG_valid + w*transfer_proxy
+  transfer_datasets: [NELLInductive:v1, GF_MUTAG, NF_Wisconsin]
+
+checkpoint: ./ckpts/ultra_3g.pth
