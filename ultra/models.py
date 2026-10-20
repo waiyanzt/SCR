@@ -2,7 +2,6 @@ import torch
 import os, copy
 import faiss
 from torch import nn
-from .moe import MoE
 from . import tasks, layers
 from ultra.base_nbfnet import BaseNBFNet
 import torch_geometric.utils as pygutils

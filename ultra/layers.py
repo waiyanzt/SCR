@@ -7,12 +7,23 @@ from torch_geometric.nn.conv import MessagePassing
 from torch_geometric.utils import degree
 from typing import Tuple
 
-from .moe import MoE
+try:
+    from .moe import MoE
+except ModuleNotFoundError as error:
+    if error.name != __package__ + ".moe":
+        raise
+    # The released repository omits this optional mixture-of-experts module.
+    MoE = None
 from torch_scatter import scatter_mean, scatter_add, scatter_max, scatter_softmax
 
 
-class MultiConvMoE(MoE):
+class MultiConvMoE(MoE if MoE is not None else nn.Module):
     def __init__(self, input_size, output_size, num_experts, experts_conv, experts_bn=None, noisy_gating=True, k=4, coef=1, num_experts_1hop=None, layer_type="ent_conv_fnn"):
+        if MoE is None:
+            raise ImportError(
+                "MoE layers require ultra/moe.py, which is missing from the released repository. "
+                "Use the standard IndNBFNet configuration or provide the original MoE module."
+            )
         super(MultiConvMoE, self).__init__(input_size, output_size, num_experts, experts_conv, experts_bn, noisy_gating, k, coef, num_experts_1hop)
         self.layer_type = layer_type
         
