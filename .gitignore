@@ -1,3 +1,5 @@
 # Local dataset downloads and generated variants, at any directory depth.
 kg-datasets/
 tmp*
+*.zip
+rai-datasets/
