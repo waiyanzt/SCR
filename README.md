@@ -74,6 +74,12 @@ python script/eval.py
 python script/eval.py -c config/eval_all.yaml -g 0
 ```
 
+For the separate IMDb representation-sensitivity pilot (Movie-Year and
+Movie-Director link prediction with frozen SCR weights), see
+[the preprocessing and evaluation commands](docs/IMDB_ZERO_SHOT.md).
+For DBLP Paper-Conference transfer across v1-v3 and universal, see
+[the DBLP zero-shot guide](docs/DBLP_ZERO_SHOT.md).
+
 ### 4. Train
 
 ```bash
