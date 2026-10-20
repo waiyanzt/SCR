@@ -3,3 +3,9 @@ kg-datasets/
 tmp*
 *.zip
 rai-datasets/
+
+# Keep result summaries and metrics; exclude binary scores and other artifacts.
+/results/**
+!/results/**/
+!/results/**/*.md
+!/results/**/*.json
