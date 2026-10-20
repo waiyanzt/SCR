@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ref_check.py", line 18, in <module>
+    runpy.run_path(sys.argv[0], run_name="__main__")
+  File "<frozen runpy>", line 291, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/script/run.py", line 232, in <module>
+    working_dir = util.create_working_directory(cfg)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/util.py", line 131, in create_working_directory
+    os.makedirs(working_dir)
+  File "<frozen os>", line 225, in makedirs
+FileExistsError: [Errno 17] File exists: '/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ref_check/output/Ultra/WN18RR/2026-10-07-23-58-19'

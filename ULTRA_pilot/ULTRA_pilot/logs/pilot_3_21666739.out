@@ -1,0 +1,423 @@
+Unable to determine the device handle for GPU0: 0000:05:00.0: Unknown Error
+task 3: FB15k237 / ultra_3g on cn-gpu3.hpc.engr.oregonstate.edu, No devices were found
+/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/__config__.py:10: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._show_config()
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/tasks.py:181: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at ../aten/src/ATen/SparseCsrTensorImpl.cpp:53.)
+  Ahh = torch.sparse.mm(EhT, Eh).coalesce()
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py:64: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(ckpt, map_location="cpu")
+No CUDA runtime is found, using CUDA_HOME='/usr/local/apps/cuda/12.4'
+Load rspmm extension. This may take a while...
+Traceback (most recent call last):
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py", line 166, in <module>
+    main()
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py", line 125, in main
+    preds = (model(data, t_batch)[:, :N0], model(data, h_batch)[:, :N0])
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/models.py", line 23, in forward
+    relation_representations = self.relation_model(data.relation_graph, query=query_rels)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/models.py", line 100, in forward
+    output = self.bellmanford(rel_graph, h_index=query)["node_feature"]  # (batch_size, num_nodes, hidden_dim）
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/models.py", line 76, in bellmanford
+    hidden = layer(layer_input, query, boundary, data.edge_index, data.edge_type, size, edge_weight)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/layers.py", line 86, in forward
+    output = self.propagate(input=input, relation=relation, boundary=boundary, edge_index=edge_index,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/layers.py", line 118, in propagate
+    out = self.message_and_aggregate(edge_index, **msg_aggr_kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/layers.py", line 187, in message_and_aggregate
+    from .rspmm import generalized_rspmm
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/__init__.py", line 1, in <module>
+    from .rspmm import generalized_rspmm
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/rspmm.py", line 207, in <module>
+    rspmm = load_extension("rspmm", [os.path.join(path, "rspmm.cpp"), os.path.join(path, "rspmm.cu")])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/rspmm.py", line 202, in load_extension
+    return cpp_extension.load(name, sources, extra_cflags, extra_cuda_cflags, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 1312, in load
+    return _jit_compile(
+           ^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 1747, in _jit_compile
+    return _import_module_from_library(name, build_directory, is_python_module)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 2141, in _import_module_from_library
+    module = importlib.util.module_from_spec(spec)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ImportError: /nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/torch_extensions/rspmm/rspmm.so: cannot open shared object file: No such file or directory
+FAILED original
+/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/__config__.py:10: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._show_config()
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/tasks.py:181: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at ../aten/src/ATen/SparseCsrTensorImpl.cpp:53.)
+  Ahh = torch.sparse.mm(EhT, Eh).coalesce()
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py:64: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(ckpt, map_location="cpu")
+No CUDA runtime is found, using CUDA_HOME='/usr/local/apps/cuda/12.4'
+Load rspmm extension. This may take a while...
+Traceback (most recent call last):
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 2105, in _run_ninja_build
+    subprocess.run(
+  File "/nfs/stak/users/mousavij/hpc-share/anaconda3/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ninja', '-v']' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py", line 166, in <module>
+    main()
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py", line 125, in main
+    preds = (model(data, t_batch)[:, :N0], model(data, h_batch)[:, :N0])
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/models.py", line 23, in forward
+    relation_representations = self.relation_model(data.relation_graph, query=query_rels)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/models.py", line 100, in forward
+    output = self.bellmanford(rel_graph, h_index=query)["node_feature"]  # (batch_size, num_nodes, hidden_dim）
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/models.py", line 76, in bellmanford
+    hidden = layer(layer_input, query, boundary, data.edge_index, data.edge_type, size, edge_weight)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/layers.py", line 86, in forward
+    output = self.propagate(input=input, relation=relation, boundary=boundary, edge_index=edge_index,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/layers.py", line 118, in propagate
+    out = self.message_and_aggregate(edge_index, **msg_aggr_kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/layers.py", line 187, in message_and_aggregate
+    from .rspmm import generalized_rspmm
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/__init__.py", line 1, in <module>
+    from .rspmm import generalized_rspmm
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/rspmm.py", line 207, in <module>
+    rspmm = load_extension("rspmm", [os.path.join(path, "rspmm.cpp"), os.path.join(path, "rspmm.cu")])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/rspmm.py", line 202, in load_extension
+    return cpp_extension.load(name, sources, extra_cflags, extra_cuda_cflags, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 1312, in load
+    return _jit_compile(
+           ^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 1722, in _jit_compile
+    _write_ninja_file_and_build_library(
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 1834, in _write_ninja_file_and_build_library
+    _run_ninja_build(
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 2121, in _run_ninja_build
+    raise RuntimeError(message) from e
+RuntimeError: Error building extension 'rspmm': [1/2] /usr/local/apps/gcc/5.4/bin/g++ -MMD -MF rspmm.o.d -DTORCH_EXTENSION_NAME=rspmm -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE=\"_gcc\" -DPYBIND11_STDLIB=\"_libstdcpp\" -DPYBIND11_BUILD_ABI=\"_cxxabi1011\" -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/torch/csrc/api/include -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/TH -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/THC -isystem /nfs/stak/users/mousavij/hpc-share/anaconda3/include/python3.11 -D_GLIBCXX_USE_CXX11_ABI=0 -fPIC -std=c++17 -Ofast -fopenmp -DAT_PARALLEL_OPENMP -c /nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/source/rspmm.cpp -o rspmm.o 
+FAILED: [code=1] rspmm.o 
+/usr/local/apps/gcc/5.4/bin/g++ -MMD -MF rspmm.o.d -DTORCH_EXTENSION_NAME=rspmm -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE=\"_gcc\" -DPYBIND11_STDLIB=\"_libstdcpp\" -DPYBIND11_BUILD_ABI=\"_cxxabi1011\" -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/torch/csrc/api/include -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/TH -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/THC -isystem /nfs/stak/users/mousavij/hpc-share/anaconda3/include/python3.11 -D_GLIBCXX_USE_CXX11_ABI=0 -fPIC -std=c++17 -Ofast -fopenmp -DAT_PARALLEL_OPENMP -c /nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/source/rspmm.cpp -o rspmm.o 
+In file included from /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/c10/util/StringUtil.h:6:0,
+                 from /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/c10/util/Exception.h:8,
+                 from /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/ATen/Parallel-inl.h:3,
+                 from /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/ATen/Parallel.h:158,
+                 from /nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/source/rspmm.cpp:3:
+/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/c10/util/string_view.h:12:23: fatal error: string_view: No such file or directory
+compilation terminated.
+ninja: build stopped: subcommand failed.
+
+FAILED inverse
+/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/__config__.py:10: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._show_config()
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/tasks.py:181: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at ../aten/src/ATen/SparseCsrTensorImpl.cpp:53.)
+  Ahh = torch.sparse.mm(EhT, Eh).coalesce()
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py:64: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(ckpt, map_location="cpu")
+No CUDA runtime is found, using CUDA_HOME='/usr/local/apps/cuda/12.4'
+Load rspmm extension. This may take a while...
+Traceback (most recent call last):
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 2105, in _run_ninja_build
+    subprocess.run(
+  File "/nfs/stak/users/mousavij/hpc-share/anaconda3/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ninja', '-v']' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py", line 166, in <module>
+    main()
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py", line 125, in main
+    preds = (model(data, t_batch)[:, :N0], model(data, h_batch)[:, :N0])
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/models.py", line 23, in forward
+    relation_representations = self.relation_model(data.relation_graph, query=query_rels)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/models.py", line 100, in forward
+    output = self.bellmanford(rel_graph, h_index=query)["node_feature"]  # (batch_size, num_nodes, hidden_dim）
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/models.py", line 76, in bellmanford
+    hidden = layer(layer_input, query, boundary, data.edge_index, data.edge_type, size, edge_weight)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/layers.py", line 86, in forward
+    output = self.propagate(input=input, relation=relation, boundary=boundary, edge_index=edge_index,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/layers.py", line 118, in propagate
+    out = self.message_and_aggregate(edge_index, **msg_aggr_kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/layers.py", line 187, in message_and_aggregate
+    from .rspmm import generalized_rspmm
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/__init__.py", line 1, in <module>
+    from .rspmm import generalized_rspmm
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/rspmm.py", line 207, in <module>
+    rspmm = load_extension("rspmm", [os.path.join(path, "rspmm.cpp"), os.path.join(path, "rspmm.cu")])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/rspmm.py", line 202, in load_extension
+    return cpp_extension.load(name, sources, extra_cflags, extra_cuda_cflags, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 1312, in load
+    return _jit_compile(
+           ^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 1722, in _jit_compile
+    _write_ninja_file_and_build_library(
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 1834, in _write_ninja_file_and_build_library
+    _run_ninja_build(
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 2121, in _run_ninja_build
+    raise RuntimeError(message) from e
+RuntimeError: Error building extension 'rspmm': [1/2] /usr/local/apps/gcc/5.4/bin/g++ -MMD -MF rspmm.o.d -DTORCH_EXTENSION_NAME=rspmm -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE=\"_gcc\" -DPYBIND11_STDLIB=\"_libstdcpp\" -DPYBIND11_BUILD_ABI=\"_cxxabi1011\" -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/torch/csrc/api/include -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/TH -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/THC -isystem /nfs/stak/users/mousavij/hpc-share/anaconda3/include/python3.11 -D_GLIBCXX_USE_CXX11_ABI=0 -fPIC -std=c++17 -Ofast -fopenmp -DAT_PARALLEL_OPENMP -c /nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/source/rspmm.cpp -o rspmm.o 
+FAILED: [code=1] rspmm.o 
+/usr/local/apps/gcc/5.4/bin/g++ -MMD -MF rspmm.o.d -DTORCH_EXTENSION_NAME=rspmm -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE=\"_gcc\" -DPYBIND11_STDLIB=\"_libstdcpp\" -DPYBIND11_BUILD_ABI=\"_cxxabi1011\" -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/torch/csrc/api/include -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/TH -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/THC -isystem /nfs/stak/users/mousavij/hpc-share/anaconda3/include/python3.11 -D_GLIBCXX_USE_CXX11_ABI=0 -fPIC -std=c++17 -Ofast -fopenmp -DAT_PARALLEL_OPENMP -c /nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/source/rspmm.cpp -o rspmm.o 
+In file included from /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/c10/util/StringUtil.h:6:0,
+                 from /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/c10/util/Exception.h:8,
+                 from /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/ATen/Parallel-inl.h:3,
+                 from /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/ATen/Parallel.h:158,
+                 from /nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/source/rspmm.cpp:3:
+/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/c10/util/string_view.h:12:23: fatal error: string_view: No such file or directory
+compilation terminated.
+ninja: build stopped: subcommand failed.
+
+FAILED reified
+/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/__config__.py:10: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._show_config()
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/tasks.py:181: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at ../aten/src/ATen/SparseCsrTensorImpl.cpp:53.)
+  Ahh = torch.sparse.mm(EhT, Eh).coalesce()
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py:64: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(ckpt, map_location="cpu")
+No CUDA runtime is found, using CUDA_HOME='/usr/local/apps/cuda/12.4'
+Load rspmm extension. This may take a while...
+Traceback (most recent call last):
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 2105, in _run_ninja_build
+    subprocess.run(
+  File "/nfs/stak/users/mousavij/hpc-share/anaconda3/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ninja', '-v']' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py", line 166, in <module>
+    main()
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py", line 125, in main
+    preds = (model(data, t_batch)[:, :N0], model(data, h_batch)[:, :N0])
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/models.py", line 23, in forward
+    relation_representations = self.relation_model(data.relation_graph, query=query_rels)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/models.py", line 100, in forward
+    output = self.bellmanford(rel_graph, h_index=query)["node_feature"]  # (batch_size, num_nodes, hidden_dim）
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/models.py", line 76, in bellmanford
+    hidden = layer(layer_input, query, boundary, data.edge_index, data.edge_type, size, edge_weight)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/layers.py", line 86, in forward
+    output = self.propagate(input=input, relation=relation, boundary=boundary, edge_index=edge_index,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/layers.py", line 118, in propagate
+    out = self.message_and_aggregate(edge_index, **msg_aggr_kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/layers.py", line 187, in message_and_aggregate
+    from .rspmm import generalized_rspmm
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/__init__.py", line 1, in <module>
+    from .rspmm import generalized_rspmm
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/rspmm.py", line 207, in <module>
+    rspmm = load_extension("rspmm", [os.path.join(path, "rspmm.cpp"), os.path.join(path, "rspmm.cu")])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/rspmm.py", line 202, in load_extension
+    return cpp_extension.load(name, sources, extra_cflags, extra_cuda_cflags, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 1312, in load
+    return _jit_compile(
+           ^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 1722, in _jit_compile
+    _write_ninja_file_and_build_library(
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 1834, in _write_ninja_file_and_build_library
+    _run_ninja_build(
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 2121, in _run_ninja_build
+    raise RuntimeError(message) from e
+RuntimeError: Error building extension 'rspmm': [1/2] /usr/local/apps/gcc/5.4/bin/g++ -MMD -MF rspmm.o.d -DTORCH_EXTENSION_NAME=rspmm -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE=\"_gcc\" -DPYBIND11_STDLIB=\"_libstdcpp\" -DPYBIND11_BUILD_ABI=\"_cxxabi1011\" -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/torch/csrc/api/include -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/TH -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/THC -isystem /nfs/stak/users/mousavij/hpc-share/anaconda3/include/python3.11 -D_GLIBCXX_USE_CXX11_ABI=0 -fPIC -std=c++17 -Ofast -fopenmp -DAT_PARALLEL_OPENMP -c /nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/source/rspmm.cpp -o rspmm.o 
+FAILED: [code=1] rspmm.o 
+/usr/local/apps/gcc/5.4/bin/g++ -MMD -MF rspmm.o.d -DTORCH_EXTENSION_NAME=rspmm -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE=\"_gcc\" -DPYBIND11_STDLIB=\"_libstdcpp\" -DPYBIND11_BUILD_ABI=\"_cxxabi1011\" -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/torch/csrc/api/include -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/TH -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/THC -isystem /nfs/stak/users/mousavij/hpc-share/anaconda3/include/python3.11 -D_GLIBCXX_USE_CXX11_ABI=0 -fPIC -std=c++17 -Ofast -fopenmp -DAT_PARALLEL_OPENMP -c /nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/source/rspmm.cpp -o rspmm.o 
+In file included from /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/c10/util/StringUtil.h:6:0,
+                 from /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/c10/util/Exception.h:8,
+                 from /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/ATen/Parallel-inl.h:3,
+                 from /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/ATen/Parallel.h:158,
+                 from /nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/source/rspmm.cpp:3:
+/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/c10/util/string_view.h:12:23: fatal error: string_view: No such file or directory
+compilation terminated.
+ninja: build stopped: subcommand failed.
+
+FAILED shortcut2
+/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/__config__.py:10: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._show_config()
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/tasks.py:181: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at ../aten/src/ATen/SparseCsrTensorImpl.cpp:53.)
+  Ahh = torch.sparse.mm(EhT, Eh).coalesce()
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py:64: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(ckpt, map_location="cpu")
+No CUDA runtime is found, using CUDA_HOME='/usr/local/apps/cuda/12.4'
+Load rspmm extension. This may take a while...
+Traceback (most recent call last):
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 2105, in _run_ninja_build
+    subprocess.run(
+  File "/nfs/stak/users/mousavij/hpc-share/anaconda3/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ninja', '-v']' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py", line 166, in <module>
+    main()
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py", line 125, in main
+    preds = (model(data, t_batch)[:, :N0], model(data, h_batch)[:, :N0])
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/models.py", line 23, in forward
+    relation_representations = self.relation_model(data.relation_graph, query=query_rels)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/models.py", line 100, in forward
+    output = self.bellmanford(rel_graph, h_index=query)["node_feature"]  # (batch_size, num_nodes, hidden_dim）
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/models.py", line 76, in bellmanford
+    hidden = layer(layer_input, query, boundary, data.edge_index, data.edge_type, size, edge_weight)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/layers.py", line 86, in forward
+    output = self.propagate(input=input, relation=relation, boundary=boundary, edge_index=edge_index,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/layers.py", line 118, in propagate
+    out = self.message_and_aggregate(edge_index, **msg_aggr_kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/layers.py", line 187, in message_and_aggregate
+    from .rspmm import generalized_rspmm
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/__init__.py", line 1, in <module>
+    from .rspmm import generalized_rspmm
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/rspmm.py", line 207, in <module>
+    rspmm = load_extension("rspmm", [os.path.join(path, "rspmm.cpp"), os.path.join(path, "rspmm.cu")])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/rspmm.py", line 202, in load_extension
+    return cpp_extension.load(name, sources, extra_cflags, extra_cuda_cflags, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 1312, in load
+    return _jit_compile(
+           ^^^^^^^^^^^^^
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 1722, in _jit_compile
+    _write_ninja_file_and_build_library(
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 1834, in _write_ninja_file_and_build_library
+    _run_ninja_build(
+  File "/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/utils/cpp_extension.py", line 2121, in _run_ninja_build
+    raise RuntimeError(message) from e
+RuntimeError: Error building extension 'rspmm': [1/2] /usr/local/apps/gcc/5.4/bin/g++ -MMD -MF rspmm.o.d -DTORCH_EXTENSION_NAME=rspmm -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE=\"_gcc\" -DPYBIND11_STDLIB=\"_libstdcpp\" -DPYBIND11_BUILD_ABI=\"_cxxabi1011\" -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/torch/csrc/api/include -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/TH -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/THC -isystem /nfs/stak/users/mousavij/hpc-share/anaconda3/include/python3.11 -D_GLIBCXX_USE_CXX11_ABI=0 -fPIC -std=c++17 -Ofast -fopenmp -DAT_PARALLEL_OPENMP -c /nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/source/rspmm.cpp -o rspmm.o 
+FAILED: [code=1] rspmm.o 
+/usr/local/apps/gcc/5.4/bin/g++ -MMD -MF rspmm.o.d -DTORCH_EXTENSION_NAME=rspmm -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE=\"_gcc\" -DPYBIND11_STDLIB=\"_libstdcpp\" -DPYBIND11_BUILD_ABI=\"_cxxabi1011\" -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/torch/csrc/api/include -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/TH -isystem /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/THC -isystem /nfs/stak/users/mousavij/hpc-share/anaconda3/include/python3.11 -D_GLIBCXX_USE_CXX11_ABI=0 -fPIC -std=c++17 -Ofast -fopenmp -DAT_PARALLEL_OPENMP -c /nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/source/rspmm.cpp -o rspmm.o 
+In file included from /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/c10/util/StringUtil.h:6:0,
+                 from /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/c10/util/Exception.h:8,
+                 from /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/ATen/Parallel-inl.h:3,
+                 from /nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/ATen/Parallel.h:158,
+                 from /nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/rspmm/source/rspmm.cpp:3:
+/nfs/hpc/share/mousavij/gnn/env/lib/python3.11/site-packages/torch/include/c10/util/string_view.h:12:23: fatal error: string_view: No such file or directory
+compilation terminated.
+ninja: build stopped: subcommand failed.
+
+FAILED original__repeat
+need at least two finished variants under /nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/results_smoke64/FB15k237/ultra_3g

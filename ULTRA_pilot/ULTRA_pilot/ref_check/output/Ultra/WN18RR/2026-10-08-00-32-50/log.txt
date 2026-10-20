@@ -1,0 +1,48 @@
+00:32:50   Random seed: 1024
+00:32:50   Config file: ref_check_inference.yaml
+00:32:50   {'checkpoint': '/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ckpts/ultra_3g.pth',
+ 'dataset': {'class': 'WN18RR',
+             'root': '/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ref_check/kg-datasets/'},
+ 'model': {'class': 'Ultra',
+           'entity_model': {'aggregate_func': 'sum',
+                            'class': 'EntityNBFNet',
+                            'hidden_dims': [64, 64, 64, 64, 64, 64],
+                            'input_dim': 64,
+                            'layer_norm': True,
+                            'message_func': 'distmult',
+                            'short_cut': True},
+           'relation_model': {'aggregate_func': 'sum',
+                              'class': 'RelNBFNet',
+                              'hidden_dims': [64, 64, 64, 64, 64, 64],
+                              'input_dim': 64,
+                              'layer_norm': True,
+                              'message_func': 'distmult',
+                              'short_cut': True}},
+ 'optimizer': {'class': 'AdamW', 'lr': 0.0005},
+ 'output_dir': '/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ref_check/output',
+ 'task': {'adversarial_temperature': 1,
+          'metric': ['mr', 'mrr', 'hits@1', 'hits@3', 'hits@10'],
+          'name': 'TransductiveInference',
+          'num_negative': 256,
+          'strict_negative': True},
+ 'train': {'batch_per_epoch': None,
+           'batch_size': 8,
+           'gpus': [0],
+           'log_interval': 100,
+           'num_epoch': 0}}
+00:32:55   WN18RR dataset
+00:32:55   #train: 86835, #valid: 3034, #test: 3134
+00:32:55   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+00:32:55   Evaluate on valid
+00:33:37   mr: 1147.75
+00:33:37   mrr: 0.364094
+00:33:37   hits@1: 0.288728
+00:33:37   hits@3: 0.389914
+00:33:37   hits@10: 0.525379
+00:33:37   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+00:33:37   Evaluate on test
+00:34:20   mr: 1174.61
+00:34:20   mrr: 0.369067
+00:34:20   hits@1: 0.292278
+00:34:20   hits@3: 0.39231
+00:34:20   hits@10: 0.532865

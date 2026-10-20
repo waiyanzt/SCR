@@ -1,0 +1,114 @@
+task 3: FB15k237 / ultra_3g on cn-gpu4.hpc.engr.oregonstate.edu, NVIDIA GeForce RTX 2080 Ti
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/tasks.py:181: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at ../aten/src/ATen/SparseCsrTensorImpl.cpp:53.)
+  Ahh = torch.sparse.mm(EhT, Eh).coalesce()
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py:64: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(ckpt, map_location="cpu")
+Load rspmm extension. This may take a while...
+{
+ "variant": "original",
+ "checkpoint": "ultra_3g.pth",
+ "num_queries_evaluated": 64,
+ "pessimistic": {
+  "mrr": 0.37690320335109206,
+  "hits@1": 0.3046875,
+  "hits@3": 0.390625,
+  "hits@10": 0.546875,
+  "mr": 156.390625
+ },
+ "seconds_eval": 186.2,
+ "peak_gpu_mib": 379.7
+}
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/tasks.py:181: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at ../aten/src/ATen/SparseCsrTensorImpl.cpp:53.)
+  Ahh = torch.sparse.mm(EhT, Eh).coalesce()
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py:64: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(ckpt, map_location="cpu")
+Load rspmm extension. This may take a while...
+{
+ "variant": "inverse",
+ "checkpoint": "ultra_3g.pth",
+ "num_queries_evaluated": 64,
+ "pessimistic": {
+  "mrr": 0.3733379938703813,
+  "hits@1": 0.3046875,
+  "hits@3": 0.375,
+  "hits@10": 0.546875,
+  "mr": 183.6484375
+ },
+ "seconds_eval": 2.8,
+ "peak_gpu_mib": 460.8
+}
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/tasks.py:181: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at ../aten/src/ATen/SparseCsrTensorImpl.cpp:53.)
+  Ahh = torch.sparse.mm(EhT, Eh).coalesce()
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py:64: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(ckpt, map_location="cpu")
+Load rspmm extension. This may take a while...
+{
+ "variant": "reified",
+ "checkpoint": "ultra_3g.pth",
+ "num_queries_evaluated": 64,
+ "pessimistic": {
+  "mrr": 0.39012627865282845,
+  "hits@1": 0.3203125,
+  "hits@3": 0.4375,
+  "hits@10": 0.5,
+  "mr": 223.078125
+ },
+ "seconds_eval": 4.4,
+ "peak_gpu_mib": 2356.3
+}
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/tasks.py:181: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at ../aten/src/ATen/SparseCsrTensorImpl.cpp:53.)
+  Ahh = torch.sparse.mm(EhT, Eh).coalesce()
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py:64: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(ckpt, map_location="cpu")
+Load rspmm extension. This may take a while...
+{
+ "variant": "shortcut2",
+ "checkpoint": "ultra_3g.pth",
+ "num_queries_evaluated": 64,
+ "pessimistic": {
+  "mrr": 0.3397481264470624,
+  "hits@1": 0.2578125,
+  "hits@3": 0.3671875,
+  "hits@10": 0.5,
+  "mr": 301.40625
+ },
+ "seconds_eval": 2.8,
+ "peak_gpu_mib": 624.4
+}
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/upstream/ultra/tasks.py:181: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at ../aten/src/ATen/SparseCsrTensorImpl.cpp:53.)
+  Ahh = torch.sparse.mm(EhT, Eh).coalesce()
+/nfs/hpc/share/mousavij/gnn/new_code/INV-GNN/src/baselines/ULTRA_pilot/ultra_eval.py:64: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(ckpt, map_location="cpu")
+Load rspmm extension. This may take a while...
+{
+ "variant": "original",
+ "checkpoint": "ultra_3g.pth",
+ "num_queries_evaluated": 64,
+ "pessimistic": {
+  "mrr": 0.37690320335109206,
+  "hits@1": 0.3046875,
+  "hits@3": 0.390625,
+  "hits@10": 0.546875,
+  "mr": 156.390625
+ },
+ "seconds_eval": 2.4,
+ "peak_gpu_mib": 379.7
+}
+# results_smoke64/FB15k237/ultra_3g
+
+Common queries: 47 (x 2 directions)
+
+| variant | MRR | Hits@1 | Hits@10 |
+| --- | --- | --- | --- |
+| inverse | 0.3932 | 0.3298 | 0.5213 |
+| original | 0.3975 | 0.3298 | 0.5213 |
+| original__repeat | 0.3975 | 0.3298 | 0.5213 |
+| reified | 0.3857 | 0.3298 | 0.4787 |
+| shortcut2 | 0.3682 | 0.2979 | 0.4894 |
+
+| pair | Kendall tau | delta MRR | Hit@1 differs | Hit@10 differs | identical |
+| --- | --- | --- | --- | --- | --- |
+| original vs inverse | 0.8124 | -0.0044 | 0.000 | 0.043 | False |
+| original vs original__repeat | 1.0000 | +0.0000 | 0.000 | 0.000 | True |
+| original vs reified | 0.5102 | -0.0118 | 0.064 | 0.085 | False |
+| original vs shortcut2 | 0.5646 | -0.0293 | 0.096 | 0.053 | False |

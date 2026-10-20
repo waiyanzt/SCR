@@ -1,0 +1,46 @@
+{
+  "base_hashes": {
+    "entities.txt": "ceeaf46e4b4f4626",
+    "negatives_test.npy": "301130ded606f90c",
+    "negatives_valid.npy": "8f6fec7ccc47311f",
+    "relations.txt": "00205a4aafe4a02c",
+    "test.tsv": "0a97266e98ebba78",
+    "train.tsv": "0364bafb7369463b",
+    "valid.tsv": "4e4d1ceb990998e0"
+  },
+  "checkpoint": "ultra_4g.pth",
+  "checkpoint_sha256": "48a046e708adf563",
+  "dataset_dir": "data/WN18RR",
+  "device": "NVIDIA GeForce RTX 2080 Ti",
+  "limit": 0,
+  "num_graph_edges_with_inverses": 173670,
+  "num_graph_nodes": 40943,
+  "num_queries_evaluated": 3134,
+  "num_queries_in_split": 3134,
+  "num_queries_skipped_unanswerable": 0,
+  "peak_gpu_mib": 868.3,
+  "pessimistic": {
+    "hits@1": 0.4146458200382897,
+    "hits@10": 0.6172622846202935,
+    "hits@3": 0.5197830248883216,
+    "mr": 837.1745373324825,
+    "mrr": 0.48378363323911056
+  },
+  "seconds_eval": 54.6,
+  "seconds_setup": 3.4,
+  "split": "test",
+  "tie_aware": {
+    "hits@1": 0.4146458200382897,
+    "hits@10": 0.6190172303765157,
+    "hits@3": 0.5223356732610083,
+    "mr": 830.4942565411615,
+    "mrr": 0.4854479530171984
+  },
+  "torch": "2.4.0+cu124",
+  "variant": "all_inverse_edges__compiled",
+  "variant_hashes": {
+    "entities.txt": "ceeaf46e4b4f4626",
+    "graph.tsv": "20df0974c9eb3282",
+    "relations.txt": "00205a4aafe4a02c"
+  }
+}

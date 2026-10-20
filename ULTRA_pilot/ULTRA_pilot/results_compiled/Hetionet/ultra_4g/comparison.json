@@ -1,0 +1,102 @@
+{
+  "pairs": {
+    "original__compiled vs inverse__compiled": {
+      "common_queries": 5000,
+      "delta_mrr_tie_aware": 0.0,
+      "hits1_a": 0.2102,
+      "hits1_b": 0.2102,
+      "kendall_tau": 1.0,
+      "mrr_a": 0.2741298186325654,
+      "mrr_b": 0.2741298186325654,
+      "scores_bitwise_identical": true,
+      "share_hit10_differs": 0.0,
+      "share_hit1_differs": 0.0
+    },
+    "original__compiled vs reified_regulation__compiled": {
+      "common_queries": 5000,
+      "delta_mrr_tie_aware": 0.0,
+      "hits1_a": 0.2102,
+      "hits1_b": 0.2102,
+      "kendall_tau": 1.0,
+      "mrr_a": 0.2741298186325654,
+      "mrr_b": 0.2741298186325654,
+      "scores_bitwise_identical": true,
+      "share_hit10_differs": 0.0,
+      "share_hit1_differs": 0.0
+    },
+    "original__compiled vs shortcut2_c50k__compiled": {
+      "common_queries": 5000,
+      "delta_mrr_tie_aware": 0.0,
+      "hits1_a": 0.2102,
+      "hits1_b": 0.2102,
+      "kendall_tau": 1.0,
+      "mrr_a": 0.2741298186325654,
+      "mrr_b": 0.2741298186325654,
+      "scores_bitwise_identical": true,
+      "share_hit10_differs": 0.0,
+      "share_hit1_differs": 0.0
+    }
+  },
+  "variants": {
+    "inverse__compiled": {
+      "pessimistic": {
+        "hits@1": 0.2102,
+        "hits@10": 0.4026,
+        "hits@3": 0.2947,
+        "mrr": 0.27412976607114714
+      },
+      "queries_evaluated": 5000,
+      "tie_aware": {
+        "hits@1": 0.2102,
+        "hits@10": 0.4026,
+        "hits@3": 0.2947,
+        "mrr": 0.2741298186325654
+      }
+    },
+    "original__compiled": {
+      "pessimistic": {
+        "hits@1": 0.2102,
+        "hits@10": 0.4026,
+        "hits@3": 0.2947,
+        "mrr": 0.27412976607114714
+      },
+      "queries_evaluated": 5000,
+      "tie_aware": {
+        "hits@1": 0.2102,
+        "hits@10": 0.4026,
+        "hits@3": 0.2947,
+        "mrr": 0.2741298186325654
+      }
+    },
+    "reified_regulation__compiled": {
+      "pessimistic": {
+        "hits@1": 0.2102,
+        "hits@10": 0.4026,
+        "hits@3": 0.2947,
+        "mrr": 0.27412976607114714
+      },
+      "queries_evaluated": 5000,
+      "tie_aware": {
+        "hits@1": 0.2102,
+        "hits@10": 0.4026,
+        "hits@3": 0.2947,
+        "mrr": 0.2741298186325654
+      }
+    },
+    "shortcut2_c50k__compiled": {
+      "pessimistic": {
+        "hits@1": 0.2102,
+        "hits@10": 0.4026,
+        "hits@3": 0.2947,
+        "mrr": 0.27412976607114714
+      },
+      "queries_evaluated": 5000,
+      "tie_aware": {
+        "hits@1": 0.2102,
+        "hits@10": 0.4026,
+        "hits@3": 0.2947,
+        "mrr": 0.2741298186325654
+      }
+    }
+  }
+}
