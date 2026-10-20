@@ -23,6 +23,9 @@ PyTorch, NumPy, SciPy, pandas, and scikit-learn. Your existing SCR environment
 already supplies most dependencies; install pandas if absent. Preprocessing is
 CPU work and does not need DGL, torchdrug, or model training.
 
+In your existing HPC environment, use `python -m pip install pandas` if needed.
+Pandas is included in `requirements.txt`; no new virtual environment is required.
+
 The CSV currently lives at `rai-datasets/IMDB/movie_metadata.csv`. Its expected
 SHA-256 is `74e4a9af314eea255147a6d48a5678ad7d0be3cb8ba3fdb819ef6edddb36e2ca`.
 All commands below work with relative paths from the repository root on Linux

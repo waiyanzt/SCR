@@ -7,6 +7,7 @@ No training or model evaluation is performed by this command.
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import os
 from pathlib import Path
 import shutil
@@ -165,6 +166,13 @@ def main():
     for name in SOURCE_FILES:
         if not (args.source_repo / name).is_file():
             ap.error(f"Missing INV-GNN source file: {args.source_repo / name}")
+    required = {"torch": "torch"}
+    if args.bundle_root is None:
+        required.update({"pandas": "pandas", "sklearn": "scikit-learn", "scipy": "scipy"})
+    missing = [package for module, package in required.items() if importlib.util.find_spec(module) is None]
+    if missing:
+        ap.error("Missing preprocessing dependencies in this Python environment: " + ", ".join(missing)
+                 + ". Install them with: python -m pip install " + " ".join(missing))
     if args.bundle_root is None:
         if args.work_dir.exists():
             ap.error(f"Build directory exists: {args.work_dir}; use a new --work-dir or --bundle-root")

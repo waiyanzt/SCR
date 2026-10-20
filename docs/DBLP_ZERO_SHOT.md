@@ -21,8 +21,11 @@ not a model edge or supplied feature. The exporter rejects full-scope bundles.
 ## 1. Preprocess and export
 
 Run from the SCR repository root in your existing Python/SCR environment, with
-pandas, scikit-learn, SciPy, NumPy, and PyTorch installed. This command performs
-CPU preprocessing only; it does not run a model experiment:
+pandas, scikit-learn, SciPy, NumPy, and PyTorch installed. If your existing HPC
+environment is missing pandas, install it there with `python -m pip install pandas`.
+It is also included in the repository's `requirements.txt`. No new virtual
+environment is needed. This command performs CPU preprocessing only; it does
+not run a model experiment:
 
 ```bash
 python script/prepare_dblp_lp.py
@@ -71,6 +74,13 @@ python script/prepare_dblp_lp.py --bundle-root /path/to/DBLP/paper_conference
 Options include `--source-repo`, `--raw-dir`, `--work-dir`, and `--output`.
 Existing build/export directories are not overwritten. If a build was interrupted,
 use a fresh `--work-dir`, or point `--bundle-root` at a completed build.
+
+For example, after a failed attempt caused by a missing dependency:
+
+```bash
+python -m pip install pandas
+python script/prepare_dblp_lp.py --work-dir rai-datasets/preprocessed/scr_dblp_build_retry
+```
 
 The ignored `INV-GNN-12D9/` checkout is needed for preprocessing/export, and is
 not carried by `git push`. Evaluation uses only the portable export, SCR code,
